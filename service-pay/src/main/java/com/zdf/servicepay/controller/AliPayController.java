@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author mrzhang
+ */
 @RequestMapping("/alipay")
 @Controller
 @ResponseBody
@@ -53,8 +56,8 @@ public class AliPayController
         if (Factory.Payment.Common().verifyNotify(params))
         {
             System.out.println("验证通过");
-            String trade_no = params.get("out_trade_no");
-            long orderId = Long.parseLong(trade_no);
+            String tradeNo = params.get("out_trade_no");
+            long orderId = Long.parseLong(tradeNo);
             aliService.pay(orderId);
 
         }
