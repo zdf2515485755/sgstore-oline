@@ -5,15 +5,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
+@Getter
 @Data
 @Accessors(chain = true)
 public class ResponseResult <T>
 {
-    @Getter
     private int code;
-    @Getter
+
     private String message;
-    @Getter
+
     private T data;
 
     /**

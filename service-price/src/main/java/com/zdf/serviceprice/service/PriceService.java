@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class PriceService
     @Autowired
     private PriceRuleMapper priceRuleMapper;
 
-    public ResponseResult<ForecastPriceResponse> forecastPrice(ForecastPriceRequest forecastPriceRequest)
+    public ResponseResult forecastPrice(ForecastPriceRequest forecastPriceRequest)
     {
         String cityCode = forecastPriceRequest.getCityCode();
         String vehicleType = forecastPriceRequest.getVehicleType();
@@ -40,7 +41,7 @@ public class PriceService
         priceRuleQueryWrapper.eq("vehicle_type", vehicleType);
         priceRuleQueryWrapper.orderByDesc("fare_version");
         List<PriceRule> priceRules = priceRuleMapper.selectList(priceRuleQueryWrapper);
-        if (priceRules.size() == 0)
+        if (priceRules.isEmpty())
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_NOT_EXIST.getCode(), CommonStatusEnum.PRICE_RULE_NOT_EXIST.getMessage(), "");
         }
@@ -58,7 +59,7 @@ public class PriceService
         return ResponseResult.success(forecastPriceResponse);
     }
 
-    public ResponseResult<Double> calculatePrice(CalculatePriceRequest calculatePriceRequest)
+    public ResponseResult calculatePrice(CalculatePriceRequest calculatePriceRequest)
     {
         String cityCode = calculatePriceRequest.getCityCode();
         String vehicleType = calculatePriceRequest.getVehicleType();
@@ -68,7 +69,7 @@ public class PriceService
         priceRuleQueryWrapper.eq("vehicle_type", vehicleType);
         priceRuleQueryWrapper.orderByDesc("fare_version");
         List<PriceRule> priceRules = priceRuleMapper.selectList(priceRuleQueryWrapper);
-        if (priceRules.size() == 0)
+        if (priceRules.isEmpty())
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_NOT_EXIST.getCode(), CommonStatusEnum.PRICE_RULE_NOT_EXIST.getMessage(), "");
         }
@@ -76,7 +77,7 @@ public class PriceService
 
         Long driveTime = calculatePriceRequest.getDriveTime();
         Long driveMile = calculatePriceRequest.getDriveMile();
-        double price = getPrice(driveMile.intValue(), driveTime.intValue(), priceRule);
+        Double price = getPrice(driveMile.intValue(), driveTime.intValue(), priceRule);
         log.info(price + "");
 
         return ResponseResult.success(price);
@@ -84,7 +85,7 @@ public class PriceService
 
     /**
      * 计算价格
-     * @return
+     *
      */
     private double getPrice(Integer distance, Integer duration, PriceRule priceRule)
     {
@@ -96,25 +97,25 @@ public class PriceService
         //里程价
         //转换里程
         BigDecimal distanceDecimal = new BigDecimal(distance);
-        BigDecimal distanceMileDecimal = distanceDecimal.divide(new BigDecimal(1000), 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal distanceMileDecimal = distanceDecimal.divide(new BigDecimal(1000), 2, RoundingMode.HALF_UP);
         //获取起步距离
         Integer startMile = priceRule.getStartMile();
         BigDecimal startMileDecimal = new BigDecimal(startMile);
         double distanceSubtract = distanceMileDecimal.subtract(startMileDecimal).doubleValue();
-        Double mile = (Double) (distanceSubtract < 0 ? 0 : distanceSubtract);
+        double mile = distanceSubtract < 0 ? 0 : distanceSubtract;
         //获取每公里多少钱
         BigDecimal mileDecimal = new BigDecimal(mile);
         Double unitPricePerMile = priceRule.getUnitPricePerMile();
         BigDecimal unitPricePerMileDecimal = new BigDecimal(unitPricePerMile);
         //计算起步价
-        BigDecimal milePrice = mileDecimal.multiply(unitPricePerMileDecimal).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal milePrice = mileDecimal.multiply(unitPricePerMileDecimal).setScale(2, RoundingMode.HALF_UP);
         price = price.add(milePrice);
         //时长价
         BigDecimal durationDecimal = new BigDecimal(duration);
-        BigDecimal durationMinuteDecimal = durationDecimal.divide(new BigDecimal(60), 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal durationMinuteDecimal = durationDecimal.divide(new BigDecimal(60), 2, RoundingMode.HALF_UP);
         Double unitPricePerMinute = priceRule.getUnitPricePerMinute();
         BigDecimal unitPricePerMinuteDecimal = new BigDecimal(unitPricePerMinute);
-        BigDecimal minutePrice = durationMinuteDecimal.multiply(unitPricePerMinuteDecimal).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal minutePrice = durationMinuteDecimal.multiply(unitPricePerMinuteDecimal).setScale(2, RoundingMode.HALF_UP);
         //总价
         price = price.add(minutePrice);
         return price.doubleValue();

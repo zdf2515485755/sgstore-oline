@@ -33,13 +33,13 @@ public class TerminalServiceClient
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.TERMINAL_SERVICE_ADD_URL);
         builder.append("?");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         builder.append("&");
-        builder.append("sid=" + sid);
+        builder.append("sid=").append(sid);
         builder.append("&");
-        builder.append("name=" + name);
+        builder.append("name=").append(name);
         builder.append("&");
-        builder.append("desc=" + desc);
+        builder.append("desc=").append(desc);
 
         log.info(builder.toString());
         ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(builder.toString(), null, String.class);
@@ -59,13 +59,13 @@ public class TerminalServiceClient
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.AROUND_SEARCH_URL);
         builder.append("?");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         builder.append("&");
-        builder.append("sid=" + sid);
+        builder.append("sid=").append(sid);
         builder.append("&");
-        builder.append("center=" + center);
+        builder.append("center=").append(center);
         builder.append("&");
-        builder.append("radius=" + radius);
+        builder.append("radius=").append(radius);
 
         log.info(builder.toString());
 
@@ -106,15 +106,15 @@ public class TerminalServiceClient
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.TRSEARCH_URL);
         builder.append("?");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         builder.append("&");
-        builder.append("sid=" + sid);
+        builder.append("sid=").append(sid);
         builder.append("&");
-        builder.append("tid=" + tid);
+        builder.append("tid=").append(tid);
         builder.append("&");
-        builder.append("starttime=" + starttime);
+        builder.append("starttime=").append(starttime);
         builder.append("&");
-        builder.append("endtime=" + endtime);
+        builder.append("endtime=").append(endtime);
         log.info(builder.toString());
 
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(builder.toString(), String.class);

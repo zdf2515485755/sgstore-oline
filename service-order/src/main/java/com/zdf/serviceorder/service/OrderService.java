@@ -34,6 +34,7 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -58,10 +59,11 @@ public class OrderService
 
     /**
      * 添加订单
+     *
      * @param orderRequest
      * @return
      */
-    public ResponseResult<String> addOrder(OrderRequest orderRequest)
+    public ResponseResult addOrder(OrderRequest orderRequest)
     {
         //判断是否是黑名单
         if (isBlackDevice(orderRequest))
@@ -149,8 +151,8 @@ public class OrderService
         radiusList.add(2000);
         radiusList.add(4000);
         radiusList.add(5000);
-        ResponseResult<List<TerminalServiceResponse>> listResponseResult = null;
-        Boolean carFlag = (Boolean) false;
+        ResponseResult<List<TerminalServiceResponse>> listResponseResult;
+        boolean carFlag = (Boolean) false;
         int dispatchResult = 0;
 
         for (int index = 0; index < radiusList.size() && !carFlag; index++)
@@ -160,17 +162,14 @@ public class OrderService
             //请求map接口，搜索车辆
             listResponseResult = serviceMapClient.aroundSearch(center, radius);
             List<TerminalServiceResponse> resultData = listResponseResult.getData();
-            for (int i = 0; i < resultData.size(); i++)
-            {
-                TerminalServiceResponse terminalServiceResponse = resultData.get(i);
+            for (TerminalServiceResponse terminalServiceResponse : resultData) {
                 String desc = terminalServiceResponse.getDesc();
                 long carId = Long.parseLong(desc);
-                log.info("" + desc);
+                log.info(desc);
                 //根据车找到绑定的用户
                 ResponseResult<DriverCarResponse> availableDriver = serviceDriverUserClient.isAvailableDriver(carId);
                 DriverCarResponse driverCarResponse = availableDriver.getData();
-                if (availableDriver.getCode() == CommonStatusEnum.DRIVER_CAR_IS_NOT_EXIST.getCode() || !orderInfo.getVehicleType().trim().equals(driverCarResponse.getVehicleType().trim()))
-                {
+                if (availableDriver.getCode() == CommonStatusEnum.DRIVER_CAR_IS_NOT_EXIST.getCode() || !orderInfo.getVehicleType().trim().equals(driverCarResponse.getVehicleType().trim())) {
                     continue;
                 }
                 //根据司机id查看司机是否有正在执行的订单
@@ -178,14 +177,13 @@ public class OrderService
                 String lockKey = (driverId + "").intern();
                 RLock lock = redissonClient.getLock(lockKey);
                 lock.lock();
-                if (ifDriverOrderIsVaild(driverId) > 0)
-                {
+                if (ifDriverOrderIsVaild(driverId) > 0) {
                     log.info("有正在执行的订单");
                     lock.unlock();
                     continue;
                 }
                 dispatchResult = 1;
-                    //匹配司机接单
+                //匹配司机接单
                 orderInfo.setDriverId(driverId);
                 orderInfo.setDriverPhone(driverCarResponse.getDriverPhone());
                 orderInfo.setCarId(carId);
@@ -229,7 +227,7 @@ public class OrderService
 
                 serviceSsePushClient.pushContent(passengerId, IdentityConstant.PASSENGER_IDENTITY, passengerContent.toString());
 
-                carFlag = (Boolean) true;
+                carFlag = true;
                 lock.unlock();
                 break;
             }
@@ -254,8 +252,7 @@ public class OrderService
                 .or().eq("order_status", Optional.of(OrderConstant.PASSENGER_GET_OFF))
                 .or().eq("order_status", Optional.of(OrderConstant.TO_START_PAY))
         );
-        Integer orderCount = orderInfoMapper.selectCount(queryWrapper);
-        return orderCount;
+        return orderInfoMapper.selectCount(queryWrapper);
     }
 
     /**
@@ -272,8 +269,7 @@ public class OrderService
                 .or().eq("order_status", Optional.of(OrderConstant.DRIVER_ARRIVED_DEPARTURE))
                 .or().eq("order_status", Optional.of(OrderConstant.PICK_UP_PASSENGER))
         );
-        Integer orderCount = orderInfoMapper.selectCount(queryWrapper);
-        return orderCount;
+        return orderInfoMapper.selectCount(queryWrapper);
     }
     /**
      * 检查设备是不是在黑名单
@@ -285,13 +281,13 @@ public class OrderService
         String deviceCode = orderRequest.getDeviceCode();
         String blackDeviceKey = RedisKeyUtils.blackDevicePrefix + deviceCode;
         Boolean result = stringRedisTemplate.hasKey(blackDeviceKey);
-        if (result)
+        if (Boolean.TRUE.equals(result))
         {
             String value = stringRedisTemplate.opsForValue().get(blackDeviceKey);
-            int i = Integer.parseInt(value);
+            int i = Integer.parseInt(Objects.requireNonNull(value));
             if (i >= 2)
             {
-                return (Boolean) true;
+                return true;
             }
             else
             {
@@ -302,7 +298,7 @@ public class OrderService
         {
             stringRedisTemplate.opsForValue().setIfAbsent(blackDeviceKey, "1", 1, TimeUnit.HOURS);
         }
-        return (Boolean) false;
+        return false;
     }
 
     /**
@@ -326,7 +322,7 @@ public class OrderService
         return responseResult.getData();
     }
 
-    public ResponseResult<String> changeOrderStatus(OrderRequest orderRequest)
+    public ResponseResult changeOrderStatus(OrderRequest orderRequest)
     {
         Long orderId = orderRequest.getOrderId();
         String toPickUpPassengerAddress = orderRequest.getToPickUpPassengerAddress();
@@ -345,7 +341,7 @@ public class OrderService
         return ResponseResult.success("");
     }
 
-    public ResponseResult<String> arriveDeparture(OrderRequest orderRequest)
+    public ResponseResult arriveDeparture(OrderRequest orderRequest)
     {
         Long orderId = orderRequest.getOrderId();
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
@@ -359,7 +355,7 @@ public class OrderService
 
     }
 
-    public ResponseResult<String> pickUpPassenger(OrderRequest orderRequest)
+    public ResponseResult pickUpPassenger(OrderRequest orderRequest)
     {
         Long orderId = orderRequest.getOrderId();
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
@@ -373,7 +369,7 @@ public class OrderService
         return ResponseResult.success("");
     }
 
-    public ResponseResult<String> passengerGetoff(OrderRequest orderRequest)
+    public ResponseResult passengerGetoff(OrderRequest orderRequest)
     {
         Long orderId = orderRequest.getOrderId();
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
@@ -417,7 +413,7 @@ public class OrderService
         return ResponseResult.success("");
     }
 
-    public ResponseResult<String> startPay(@RequestBody OrderRequest orderRequest)
+    public ResponseResult startPay(@RequestBody OrderRequest orderRequest)
     {
         Long orderId = orderRequest.getOrderId();
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
@@ -426,7 +422,7 @@ public class OrderService
         return ResponseResult.success("");
     }
 
-    public ResponseResult<String> pay(@RequestBody OrderRequest orderRequest)
+    public ResponseResult pay(@RequestBody OrderRequest orderRequest)
     {
         Long orderId = orderRequest.getOrderId();
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
@@ -437,12 +433,11 @@ public class OrderService
         return ResponseResult.success("success");
     }
 
-    public ResponseResult<String> cancel(Long orderId, String identity)
+    public ResponseResult cancel(Long orderId, String identity)
     {
         OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
         Integer orderStatus = orderInfo.getOrderStatus();
         LocalDateTime cancelTime = LocalDateTime.now();
-        Integer cancelOperator = null;
         Integer cancelTypeCode = null;
         int cancelFlag = 1;
 

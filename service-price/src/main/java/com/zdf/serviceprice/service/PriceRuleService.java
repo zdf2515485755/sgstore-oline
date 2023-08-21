@@ -27,7 +27,7 @@ public class PriceRuleService
 {
     @Autowired
     private PriceRuleMapper priceRuleMapper;
-    public ResponseResult<String> addPriceRule(PriceRule priceRule)
+    public ResponseResult addPriceRule(PriceRule priceRule)
     {
         //先查询表中是否有记录，没有才插入
         String cityCode = priceRule.getCityCode();
@@ -38,7 +38,7 @@ public class PriceRuleService
         priceRuleQueryWrapper.orderByDesc("fare_version");
         List<PriceRule> priceRules = priceRuleMapper.selectList(priceRuleQueryWrapper);
         int fareVersion = 0;
-        if (priceRules.size() > 0)
+        if (!priceRules.isEmpty())
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_EXIST.getCode(), CommonStatusEnum.PRICE_RULE_EXIST.getMessage(), "");
         }
@@ -50,7 +50,7 @@ public class PriceRuleService
         return ResponseResult.success("1");
     }
 
-    public ResponseResult<String> editPriceRule(PriceRule priceRule)
+    public ResponseResult editPriceRule(PriceRule priceRule)
     {
         //先查询表中是否有记录，有才更新
         String cityCode = priceRule.getCityCode();
@@ -81,14 +81,14 @@ public class PriceRuleService
         return ResponseResult.success("1");
     }
 
-    public ResponseResult<PriceRule> getPriceRule(@RequestParam String fareType)
+    public ResponseResult getPriceRule(@RequestParam String fareType)
     {
         QueryWrapper<PriceRule> QueryWrapper = new QueryWrapper<>();
         QueryWrapper.eq("fare_type", fareType);
         QueryWrapper.orderByDesc("fare_version");
 
         List<PriceRule> priceRules = priceRuleMapper.selectList(QueryWrapper);
-        if (priceRules.size() == 0)
+        if (priceRules.isEmpty())
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_NOT_EXIST.getCode(), CommonStatusEnum.PRICE_RULE_NOT_EXIST.getMessage());
         }
@@ -96,7 +96,7 @@ public class PriceRuleService
         return ResponseResult.success(priceRule);
     }
 
-    public ResponseResult<Boolean> isNewPriceRule(String fareType, Integer fareVersion)
+    public ResponseResult isNewPriceRule(String fareType, Integer fareVersion)
     {
         ResponseResult<PriceRule> responseResult = getPriceRule(fareType);
         if (responseResult.getCode() == CommonStatusEnum.PRICE_RULE_NOT_EXIST.getCode())
@@ -115,7 +115,7 @@ public class PriceRuleService
         }
     }
     
-    public ResponseResult<Boolean> isExist(@RequestBody PriceRule priceRule)
+    public ResponseResult isExist(@RequestBody PriceRule priceRule)
     {
         String cityCode = priceRule.getCityCode();
         String vehicleType = priceRule.getVehicleType();

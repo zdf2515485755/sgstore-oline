@@ -3,6 +3,7 @@ package com.zdf.internalcommon.constant;
 import lombok.Getter;
 
 
+@Getter
 public enum CommonStatusEnum
 {
     SUCCESS(1,"success"),
@@ -38,7 +39,6 @@ public enum CommonStatusEnum
     ORDER_CANCEL_ERROR(1601, "订单取消失败"),
 
     VALIDATION_EXCEPTION(1900, "参数验证错误");
-    @Getter
     private int code;
     @Getter
     private String message;
