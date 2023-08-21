@@ -2,6 +2,7 @@ package com.zdf.testalipay.controller;
 
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.payment.page.models.AlipayTradePagePayResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RequestMapping("/alipay")
 @Controller
 @ResponseBody
+@Slf4j
 public class AliPayController
 {
     @GetMapping("/pay")
@@ -50,11 +52,11 @@ public class AliPayController
 
         if (Boolean.TRUE.equals(Factory.Payment.Common().verifyNotify(params)))
         {
-            System.out.println("验证通过");
+            log.info("验证通过");
         }
         else
         {
-            System.out.println("验证不通过");
+            log.info("验证不通过");
         }
 
         return "success";

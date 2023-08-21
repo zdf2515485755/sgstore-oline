@@ -3,6 +3,7 @@ package com.zdf.servicepay.controller;
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.payment.page.models.AlipayTradePagePayResponse;
 import com.zdf.servicepay.service.AliService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.util.Map;
 @RequestMapping("/alipay")
 @Controller
 @ResponseBody
+@Slf4j
 public class AliPayController
 {
     @Autowired
@@ -53,9 +55,9 @@ public class AliPayController
             }
         }
 
-        if (Factory.Payment.Common().verifyNotify(params))
+        if (Boolean.TRUE.equals(Factory.Payment.Common().verifyNotify(params)))
         {
-            System.out.println("验证通过");
+            log.info("验证通过");
             String tradeNo = params.get("out_trade_no");
             long orderId = Long.parseLong(tradeNo);
             aliService.pay(orderId);
@@ -63,7 +65,7 @@ public class AliPayController
         }
         else
         {
-            System.out.println("验证不通过");
+            log.info("验证不通过");
         }
 
         return "success";
