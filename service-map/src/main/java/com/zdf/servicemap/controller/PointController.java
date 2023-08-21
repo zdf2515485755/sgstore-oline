@@ -17,7 +17,7 @@ public class PointController
     private PointService pointService;
 
     @PostMapping("/upload")
-    public ResponseResult<String> uploadPoint(@RequestBody PointServiceRequest pointServiceRequest)
+    public ResponseResult uploadPoint(@RequestBody PointServiceRequest pointServiceRequest)
     {
         return pointService.uploadPoint(pointServiceRequest);
     }
