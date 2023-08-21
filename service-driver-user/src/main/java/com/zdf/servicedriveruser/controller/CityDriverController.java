@@ -16,7 +16,7 @@ public class CityDriverController
     private CityDriverService cityDriverService;
 
     @GetMapping("/is-available-driver")
-    public ResponseResult<Boolean> isAvailableDriver(@RequestParam String address)
+    public ResponseResult isAvailableDriver(@RequestParam String address)
     {
         return cityDriverService.isAvailableDriver(address);
     }

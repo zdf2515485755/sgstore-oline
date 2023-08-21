@@ -25,7 +25,7 @@ public class DriverUserWorkStatusController
     private DriverUserWorkStatusService driverUserWorkStatusService;
 
     @PostMapping("/driver-user-work-status")
-    public ResponseResult<String> updateWorkStatus(@RequestBody DriverUserWorkStatus driverUserWorkStatus)
+    public ResponseResult updateWorkStatus(@RequestBody DriverUserWorkStatus driverUserWorkStatus)
     {
         Long driverId = driverUserWorkStatus.getDriverId();
         Integer workStatus = driverUserWorkStatus.getWorkStatus();

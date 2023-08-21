@@ -1,7 +1,6 @@
 package com.zdf.serviceverificationcode.controller;
 
 import com.zdf.internalcommon.dto.ResponseResult;
-import com.zdf.internalcommon.response.NumberResponseCode;
 import com.zdf.serviceverificationcode.service.NumberCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ public class NumberCodeController
     private NumberCodeService numberCodeService;
 
     @GetMapping("/numberCode/{size}")
-    public ResponseResult<NumberResponseCode> numberCode(@PathVariable("size") int size)
+    public ResponseResult numberCode(@PathVariable("size") int size)
     {
 
         return numberCodeService.generateNumberCode(size);

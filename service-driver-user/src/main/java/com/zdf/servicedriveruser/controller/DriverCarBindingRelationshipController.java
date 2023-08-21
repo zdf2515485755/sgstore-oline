@@ -35,7 +35,7 @@ public class DriverCarBindingRelationshipController
     }
 
     @GetMapping("/get")
-    public ResponseResult<DriverCarBindingRelationship> getDriverCarBindingRelationship(String driverPhone)
+    public ResponseResult getDriverCarBindingRelationship(String driverPhone)
     {
         return driverCarBindingRelationshipService.getDriverCarBindingRelationship(driverPhone);
     }

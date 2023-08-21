@@ -75,11 +75,12 @@ public class OrderController
 
     /**
      * 支付
+     *
      * @param orderRequest
      * @return
      */
     @PostMapping("/pay")
-    public ResponseResult<String> pay(@RequestBody OrderRequest orderRequest)
+    public ResponseResult pay(@RequestBody OrderRequest orderRequest)
     {
         return orderService.pay(orderRequest);
     }

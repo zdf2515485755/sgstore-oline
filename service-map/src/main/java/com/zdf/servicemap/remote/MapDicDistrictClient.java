@@ -112,7 +112,7 @@ public class MapDicDistrictClient
 
     private int generateLevel(String level)
     {
-        int levelResult = 0;
+        int levelResult = -1;
         if (level.trim().equals("country".trim()))
         {
             levelResult = 0;

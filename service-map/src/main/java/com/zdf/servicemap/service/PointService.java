@@ -12,7 +12,7 @@ public class PointService
     @Autowired
     private PointServiceClient pointServiceClient;
 
-    public ResponseResult<String> uploadPoint(PointServiceRequest pointServiceRequest)
+    public ResponseResult uploadPoint(PointServiceRequest pointServiceRequest)
     {
         return pointServiceClient.uploadPoint(pointServiceRequest);
     }
