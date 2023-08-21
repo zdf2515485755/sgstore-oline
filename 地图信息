@@ -1,0 +1,105 @@
+服务信息
+{
+    "data": {
+        "name": "OnlineTaxiService",
+        "sid": 809394
+    },
+    "errcode": 10000,
+    "errdetail": null,
+    "errmsg": "OK"
+}
+
+终端信息
+{
+    "data": {
+        "name": "taxi1",
+        "tid": "585060476",
+        "sid": 809394
+    },
+    "errcode": 10000,
+    "errdetail": null,
+    "errmsg": "OK"
+}
+
+轨迹信息
+{
+    "data": {
+        "trid": 40
+    },
+    "errcode": 10000,
+    "errdetail": null,
+    "errmsg": "OK"
+}
+
+[
+{"location":"116.353388,39.986947","locatetime":1668600104183},
+{"location":"116.354418,39.987276","locatetime":1668600123728},
+{"location":"116.356735,39.986881","locatetime":1668600145670},
+{"location":"116.357851,39.98675","locatetime":1668600167305},
+{"location":"116.358881,39.987144","locatetime":1668600187006},
+{"location":"116.361027,39.986947","locatetime":1668600208251},
+{"location":"116.361971,39.986881","locatetime":1668600225399},
+{"location":"116.364718,39.987079","locatetime":1668600241318},
+{"location":"116.365404,39.987144","locatetime":1668600260554},
+{"location":"116.366348,39.987144","locatetime":1668600278966}
+]
+
+[
+{"location":"116.397712,39.907245","locatetime":1669034291360},
+{"location":"116.403463,39.907706","locatetime":1669034291370},
+{"location":"116.406982,39.90764","locatetime":1669034291860},
+{"location":"116.411445,39.908298","locatetime":1669034391360},
+]
+
+{
+    "data": {
+        "counts": 1,
+        "tracks": [
+            {
+                "counts": 10,
+                "degradedParams": {},
+                "distance": 1132,
+
+
+                "time": 174783,
+                "trid": 280
+            }
+        ]
+    },
+    "errcode": 10000,
+    "errdetail": null,
+    "errmsg": "OK"
+}
+
+{
+  "toPickUpPassengerLongitude": "116.40",
+  "toPickUpPassengerLatitude": "39.91",
+  "toPickUpPassengerAddress": "天安门",
+  "orderId": 1587427430633857000,
+  "toPickUpPassengerTime": "2022-11-11 18:20:46"
+}
+
+{
+  "orderId": 1587427430633857000
+}
+
+{
+  "orderId": 1587427430633857000,
+  "pickUpPassengerLongitude": "116.40",
+  "pickUpPassengerLatitude": "39.91"
+}
+
+{
+  "orderId": 1587427430633857000,
+  "passengerGetoffLongitude": "116.40",
+  "passengerGetoffLatitude": "39.99"
+}
+
+{
+   "code": 1,
+   "message": "",
+   "data": ""
+}
+
+https://tsapi.amap.com/v1/track/terminal/trsearch?key=4662262223a037bc3c06c5169f2f14af&sid=809394&tid=594222569&starttime=1668851455000&endtime=1668851558926
+https://tsapi.amap.com/v1/track/terminal/trsearch?key=4662262223a037bc3c06c5169f2f14af&sid=809394&tid=594222569&starttime=1669032797000&endtime=1669033519287

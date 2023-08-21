@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+  <h1>模拟乘客客户端</h1>
+  <button onclick="setMessageContent('faker')">测试点击</button>
+  <div id = "message">展示消息推送的地方</br></div>
+  <button onclick="sourceClose()">关闭连接</button>
+
+  <script>
+    userId = "1587405851631931393";
+    identity = 1;
+    source = null;
+
+    function setMessageContent(content)
+    {
+        document.getElementById("message").innerHTML += (content + '</br>');
+    }
+
+    if (window.EventSource)
+    {
+      source = new EventSource("http://localhost:9000/connect?userId=" + userId + "&" + "identity=" + identity);
+
+      source.addEventListener('message', function (e){
+          content = e.data;
+          setMessageContent(content);
+        });
+    }
+    else
+    {
+      setMessageContent("不支持");
+    }
+
+
+    function sourceClose()
+    {
+        xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.open("get", "http://localhost:9000/close?userId=" + userId + "&" + "identity=" + identity);
+        xmlHttpRequest.send();
+    }
+  </script>
+</body>
+
+</html>
