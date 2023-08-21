@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author mrzhang
+ */
 @RequestMapping("/alipay")
 @Controller
 @ResponseBody
@@ -33,10 +36,10 @@ public class AliPayController
 
     @PostMapping("/notify")
     public String notify(HttpServletRequest httpServletRequest) throws Exception {
-        String trade_status = httpServletRequest.getParameter("trade_status");
+        String tradeStatus = httpServletRequest.getParameter("trade_status");
         Map<String, String> params = new HashMap<>();
         
-        if (trade_status.trim().equals("TRADE_SUCCESS"))
+        if ("TRADE_SUCCESS".equals(tradeStatus.trim()))
         {
             Map<String, String[]> parameterMap = httpServletRequest.getParameterMap();
             for (String name: parameterMap.keySet())
@@ -45,7 +48,7 @@ public class AliPayController
             }
         }
 
-        if (Factory.Payment.Common().verifyNotify(params))
+        if (Boolean.TRUE.equals(Factory.Payment.Common().verifyNotify(params)))
         {
             System.out.println("验证通过");
         }

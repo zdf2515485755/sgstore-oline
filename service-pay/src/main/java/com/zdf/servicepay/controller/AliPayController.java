@@ -38,10 +38,10 @@ public class AliPayController
 
     @PostMapping("/notify")
     public String notify(HttpServletRequest httpServletRequest) throws Exception {
-        String trade_status = httpServletRequest.getParameter("trade_status");
+        String tradeStatus = httpServletRequest.getParameter("trade_status");
         Map<String, String> params = new HashMap<>();
         
-        if (trade_status.trim().equals("TRADE_SUCCESS"))
+        if ("TRADE_SUCCESS".equals(tradeStatus.trim()))
         {
             Map<String, String[]> parameterMap = httpServletRequest.getParameterMap();
             for (String name: parameterMap.keySet())
