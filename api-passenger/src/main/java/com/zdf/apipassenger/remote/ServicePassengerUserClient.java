@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ServicePassengerUserClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/user")
-    public ResponseResult logOrRegister(VerificationCodeRequest verificationCodeDTO);
+    ResponseResult logOrRegister(VerificationCodeRequest verificationCodeDTO);
 
     @RequestMapping(method = RequestMethod.GET, value = "/user/{phone}")
-    public ResponseResult<PassengerUser> getUser(@PathVariable("phone") String passengerPhone);
+    ResponseResult<PassengerUser> getUser(@PathVariable("phone") String passengerPhone);
 }
 

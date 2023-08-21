@@ -25,7 +25,7 @@ public class AliPayController
     @GetMapping("/pay")
     public String pay(String subject, String outTradeNo, String totalAmount)
     {
-        AlipayTradePagePayResponse response = null;
+        AlipayTradePagePayResponse response;
 
         try {
             response = Factory.Payment.Page().pay(subject, outTradeNo, totalAmount, "");

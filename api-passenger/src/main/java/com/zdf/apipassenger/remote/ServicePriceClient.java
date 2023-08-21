@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ServicePriceClient
 {
     @RequestMapping(method = RequestMethod.POST,value = "/forecast-price")
-    public ResponseResult<ForecastPriceResponse> forecastPrice(@RequestBody ForecastPriceRequest forecastPriceDTO);
+    ResponseResult<ForecastPriceResponse> forecastPrice(@RequestBody ForecastPriceRequest forecastPriceDTO);
 }

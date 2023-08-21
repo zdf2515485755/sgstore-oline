@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ServiceDriverUserClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/user")
-    public ResponseResult addUser(@RequestBody DriverUser driverUser);
+    ResponseResult addUser(@RequestBody DriverUser driverUser);
 
     @RequestMapping(method = RequestMethod.PUT, value = "/user")
-    public ResponseResult updateUser(@RequestBody DriverUser driverUser);
+    ResponseResult updateUser(@RequestBody DriverUser driverUser);
 
     @RequestMapping(method = RequestMethod.POST, value = "/car")
-    public ResponseResult insertCar(@RequestBody Car car);
+    ResponseResult insertCar(@RequestBody Car car);
 
     @RequestMapping(method = RequestMethod.POST, value = "/driver-car-binding-relationship/bind")
-    public ResponseResult bind(@RequestBody DriverCarBindingRelationship driverCarBindingRelationship);
+    ResponseResult bind(@RequestBody DriverCarBindingRelationship driverCarBindingRelationship);
 
     @RequestMapping(method = RequestMethod.POST, value = "/driver-car-binding-relationship/unbind")
-    public ResponseResult unBind(@RequestBody DriverCarBindingRelationship driverCarBindingRelationship);
+    ResponseResult unBind(@RequestBody DriverCarBindingRelationship driverCarBindingRelationship);
 
 }

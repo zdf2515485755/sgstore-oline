@@ -22,17 +22,17 @@ public class TraceServiceClient
     @Autowired
     RestTemplate restTemplate;
 
-    public ResponseResult<TraceResponse> addTrace(String tid)
+    public ResponseResult addTrace(String tid)
     {
         //https://tsapi.amap.com/v1/track/trace/add?key=4662262223a037bc3c06c5169f2f14af&sid=808074&tid=584693620
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.TRACE_SERVICE_ADD_URL);
         builder.append("?");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         builder.append("&");
-        builder.append("sid=" + sid);
+        builder.append("sid=").append(sid);
         builder.append("&");
-        builder.append("tid=" + tid);
+        builder.append("tid=").append(tid);
         log.info(builder.toString());
 
         ResponseEntity<String> resultEntity = restTemplate.postForEntity(builder.toString(), null, String.class);

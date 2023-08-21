@@ -33,11 +33,11 @@ public class MapDicDistrictClient
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.DISTRICT_URL);
         builder.append("?");
-        builder.append("keywords=" + keywords);
+        builder.append("keywords=").append(keywords);
         builder.append("&");
         builder.append("subdistrict=3");
         builder.append("&");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         log.info(builder.toString());
         //请求服务
         ResponseEntity<String> forEntity = restTemplate.getForEntity(builder.toString(), String.class);
@@ -71,8 +71,7 @@ public class MapDicDistrictClient
                 String provinceName = provinceJsonObject.getString(MapConfigConstant.NAME);
                 String pLevel = provinceJsonObject.getString(MapConfigConstant.LEVEL);
                 int provinceLevel = generateLevel(pLevel);
-                String provinceParentCode = countryCode;
-                insertValue(provinceCode, provinceName, provinceParentCode, provinceLevel);
+                insertValue(provinceCode, provinceName, countryCode, provinceLevel);
                 
                 //解析城市字段
                 JSONArray cityJsonArray = provinceJsonObject.getJSONArray(MapConfigConstant.DISTRICTS);
@@ -83,8 +82,7 @@ public class MapDicDistrictClient
                     String cityName = cityJsonObject.getString(MapConfigConstant.NAME);
                     String ciLevel = cityJsonObject.getString(MapConfigConstant.LEVEL);
                     int cityLevel = generateLevel(ciLevel);
-                    String cityParentCode = provinceCode;
-                    insertValue(cityCode, cityName, cityParentCode, cityLevel);
+                    insertValue(cityCode, cityName, provinceCode, cityLevel);
                     //解析区县字段
                     JSONArray districtsJsonArray = cityJsonObject.getJSONArray(MapConfigConstant.DISTRICTS);
                     for (int district = 0; district < districtsJsonArray.size(); district++)
@@ -98,9 +96,8 @@ public class MapDicDistrictClient
                             continue;
                         }
                         int districtLevel = generateLevel(diLevel);
-                        String districtParentCode = cityCode;
 
-                        insertValue(districtCode, districtName, districtParentCode, districtLevel);
+                        insertValue(districtCode, districtName, cityCode, districtLevel);
 
                     }
 

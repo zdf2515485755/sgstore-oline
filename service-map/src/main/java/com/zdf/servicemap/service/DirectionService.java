@@ -14,12 +14,9 @@ public class DirectionService
 {
    @Autowired
    private MapDirectionClient mapDirectionClient;
-    public ResponseResult<DirectionResponse> driving(ForecastPriceRequest forecastPriceRequest)
+    public ResponseResult driving(ForecastPriceRequest forecastPriceRequest)
     {
         //组装url
-        /**
-         * output=json&key=4662262223a037bc3c06c5169f2f14af
-         */
         //请求响应
         //解析结果
         String depLongitude = forecastPriceRequest.getDepLongitude();

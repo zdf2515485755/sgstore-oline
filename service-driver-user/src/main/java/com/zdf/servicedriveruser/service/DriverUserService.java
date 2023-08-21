@@ -55,7 +55,7 @@ public class DriverUserService
         return ResponseResult.success("1");
     }
 
-    public ResponseResult<DriverUserResponse> getDriverUser(String driverPhone)
+    public ResponseResult getDriverUser(String driverPhone)
     {
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put("driver_phone", driverPhone);
@@ -73,7 +73,7 @@ public class DriverUserService
         return ResponseResult.success(driverUserResponse);
     }
 
-    public ResponseResult<DriverCarResponse> isAvailableDriver(Long carId)
+    public ResponseResult isAvailableDriver(Long carId)
     {
         //根据车牌信息查询和这辆车绑定的司机
         QueryWrapper<DriverCarBindingRelationship> driverCarBindingRelationshipQueryWrapper = new QueryWrapper<>();

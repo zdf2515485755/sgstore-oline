@@ -15,22 +15,24 @@ public class OrderController
 
     /**
      * 下订单
+     *
      * @param orderRequest
      * @return
      */
     @PostMapping("/add")
-    public ResponseResult<String> addOrder(@RequestBody OrderRequest orderRequest)
+    public ResponseResult addOrder(@RequestBody OrderRequest orderRequest)
     {
         return orderService.addOrder(orderRequest);
     }
 
     /**
      * 去接乘客
+     *
      * @param orderRequest
      * @return
      */
     @PostMapping("/to-pick-up-passenger")
-    public ResponseResult<String> changeOrderStatus(@RequestBody OrderRequest orderRequest)
+    public ResponseResult changeOrderStatus(@RequestBody OrderRequest orderRequest)
     {
         return orderService.changeOrderStatus(orderRequest);
     }
@@ -39,18 +41,19 @@ public class OrderController
      * 到达乘客所在地
      */
     @PostMapping("/arrive-departure")
-    public ResponseResult<String> arriveDeparture(@RequestBody OrderRequest orderRequest)
+    public ResponseResult arriveDeparture(@RequestBody OrderRequest orderRequest)
     {
         return orderService.arriveDeparture(orderRequest);
     }
 
     /**
      * 司机接到乘客
+     *
      * @param orderRequest
      * @return
      */
     @PostMapping("/pick-up-passenger")
-    public ResponseResult<String> pickUpPassenger(@RequestBody OrderRequest orderRequest)
+    public ResponseResult pickUpPassenger(@RequestBody OrderRequest orderRequest)
     {
         return orderService.pickUpPassenger(orderRequest);
     }
@@ -59,13 +62,13 @@ public class OrderController
      * 司机到达目的地
      */
     @PostMapping("/passenger-get-off")
-    public ResponseResult<String> passengerGetoff(@RequestBody OrderRequest orderRequest)
+    public ResponseResult passengerGetoff(@RequestBody OrderRequest orderRequest)
     {
         return orderService.passengerGetoff(orderRequest);
     }
 
     @PostMapping("/startPay")
-    public ResponseResult<String> startPay(@RequestBody OrderRequest orderRequest)
+    public ResponseResult startPay(@RequestBody OrderRequest orderRequest)
     {
         return orderService.startPay(orderRequest);
     }
@@ -83,12 +86,13 @@ public class OrderController
 
     /**
      * 取消订单
+     *
      * @param orderId
      * @param identity
      * @return
      */
     @PostMapping("/cancel")
-    public ResponseResult<String> cancel(@RequestParam Long orderId, @RequestParam String identity)
+    public ResponseResult cancel(@RequestParam Long orderId, @RequestParam String identity)
     {
         return orderService.cancel(orderId, identity);
     }

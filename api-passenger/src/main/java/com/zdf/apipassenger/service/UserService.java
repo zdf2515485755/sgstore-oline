@@ -1,7 +1,6 @@
 package com.zdf.apipassenger.service;
 
 import com.zdf.apipassenger.remote.ServicePassengerUserClient;
-import com.zdf.internalcommon.dto.PassengerUser;
 import com.zdf.internalcommon.dto.ResponseResult;
 import com.zdf.internalcommon.dto.TokenResult;
 import com.zdf.internalcommon.utils.JwtUtils;
@@ -23,9 +22,8 @@ public class UserService
         String phone = tokenResult.getPhone();
         log.info("phone: " + phone);
         //根据手机号查询用户返回
-        ResponseResult<PassengerUser> user = servicePassengerUserClient.getUser(phone);
 
-        return user;
+        return servicePassengerUserClient.getUser(phone);
 
     }
 }

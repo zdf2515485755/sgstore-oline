@@ -16,9 +16,8 @@ public class DistrictService
     public ResponseResult initDictDistrict(String keywords)
     {
         //请求服务
-        ResponseResult responseResult = mapDicDistrictClient.initDictDistrict(keywords);
         //解析返回结果
         //插入数据库
-        return responseResult;
+        return mapDicDistrictClient.initDictDistrict(keywords);
     }
 }

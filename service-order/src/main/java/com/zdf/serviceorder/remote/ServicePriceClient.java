@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ServicePriceClient
 {
     @RequestMapping(method = RequestMethod.GET, value = "/price-rule/is-new")
-    public ResponseResult<Boolean> isNewPriceRule(@RequestParam String fareType, @RequestParam Integer fareVersion);
+    ResponseResult<Boolean> isNewPriceRule(@RequestParam String fareType, @RequestParam Integer fareVersion);
 
     @RequestMapping(method = RequestMethod.POST, value = "/price-rule/is-exist")
-    public ResponseResult<Boolean> isExist(@RequestBody PriceRule priceRule);
+    ResponseResult<Boolean> isExist(@RequestBody PriceRule priceRule);
 
     @RequestMapping(method = RequestMethod.POST, value = "/calculate-price")
-    public ResponseResult<Double> calculatePrice(@RequestBody CalculatePriceRequest calculatePriceRequest);
+    ResponseResult<Double> calculatePrice(@RequestBody CalculatePriceRequest calculatePriceRequest);
 }

@@ -17,7 +17,7 @@ public class DriverUserWorkStatusService
     @Autowired
     private DriverUserWorkStatusMapper driverUserWorkStatusMapper;
 
-    public ResponseResult<String> updateWorkStatus(Long driverId, Integer workStatus)
+    public ResponseResult updateWorkStatus(Long driverId, Integer workStatus)
     {
         LocalDateTime now = LocalDateTime.now();
         Map<String, Object> queryMap = new HashMap<>();

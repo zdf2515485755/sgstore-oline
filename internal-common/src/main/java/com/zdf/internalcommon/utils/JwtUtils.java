@@ -36,14 +36,10 @@ public class JwtUtils
         JWTCreator.Builder builder = JWT.create();
 
         map.forEach(
-                (k, v) -> {
-                    builder.withClaim(k, v);
-                }
+                builder::withClaim
         );
 
-        String sign = builder.sign(Algorithm.HMAC256(SIGN));
-
-        return sign;
+        return builder.sign(Algorithm.HMAC256(SIGN));
     }
 
     //解析token
@@ -72,7 +68,7 @@ public class JwtUtils
         try {
             tokenResult = JwtUtils.parseToken(token);
 
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
         return  tokenResult;

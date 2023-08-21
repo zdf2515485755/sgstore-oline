@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ServiceMapClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/point/upload")
-    public ResponseResult<String> uploadPoint(@RequestBody PointServiceRequest pointServiceRequest);
+    ResponseResult<String> uploadPoint(@RequestBody PointServiceRequest pointServiceRequest);
 }

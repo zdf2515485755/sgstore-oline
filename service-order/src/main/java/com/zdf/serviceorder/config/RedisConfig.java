@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisConfig
 {
-    private String protocal = "redis://";
-
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.port}")
@@ -23,7 +21,8 @@ public class RedisConfig
     public RedissonClient redissonClient()
     {
         Config config = new Config();
-        config.useSingleServer().setAddress(protocal + host + ":" + port).setDatabase(database);
+        String protocol = "redis://";
+        config.useSingleServer().setAddress(protocol + host + ":" + port).setDatabase(database);
 
         return Redisson.create(config);
     }

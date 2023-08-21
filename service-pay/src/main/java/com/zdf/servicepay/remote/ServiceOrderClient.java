@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ServiceOrderClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/order/pay")
-    public ResponseResult<String> pay(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> pay(@RequestBody OrderRequest orderRequest);
 }

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ServiceDriverUserClient
 {
     @RequestMapping(method = RequestMethod.GET,value = "/city-driver/is-available-driver")
-    public ResponseResult<Boolean> isAvailableDriver(@RequestParam String address);
+    ResponseResult<Boolean> isAvailableDriver(@RequestParam String address);
 
     @RequestMapping(method = RequestMethod.GET,value = "/is-available-driver")
-    public ResponseResult<DriverCarResponse> isAvailableDriver(@RequestParam Long carId);
+    ResponseResult<DriverCarResponse> isAvailableDriver(@RequestParam Long carId);
 
     @RequestMapping(method = RequestMethod.GET, value = "/car")
-    public ResponseResult<Car> getCar(@RequestParam Long carid);
+    ResponseResult<Car> getCar(@RequestParam Long carid);
 }

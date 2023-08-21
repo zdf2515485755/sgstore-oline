@@ -60,7 +60,7 @@ public class PriceRuleService
         priceRuleQueryWrapper.eq("vehicle_type", vehicleType);
         priceRuleQueryWrapper.orderByDesc("fare_version");
         List<PriceRule> priceRules = priceRuleMapper.selectList(priceRuleQueryWrapper);
-        if (priceRules.size() == 0)
+        if (priceRules.isEmpty())
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_NOT_EXIST.getCode(), CommonStatusEnum.PRICE_RULE_NOT_EXIST.getMessage(), "");
         }

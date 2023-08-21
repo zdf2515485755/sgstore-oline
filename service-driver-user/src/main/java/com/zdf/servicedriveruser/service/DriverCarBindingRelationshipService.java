@@ -59,7 +59,7 @@ public class DriverCarBindingRelationshipService
         return ResponseResult.success("1");
     }
 
-    public ResponseResult<DriverCarBindingRelationship> getDriverCarBindingRelationship(String driverPhone)
+    public ResponseResult getDriverCarBindingRelationship(String driverPhone)
     {
         QueryWrapper<DriverUser> driverUserQueryWrapper = new QueryWrapper<>();
         driverUserQueryWrapper.eq("driver_phone", driverPhone);

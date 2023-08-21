@@ -27,9 +27,9 @@ public class MapServiceClient
        StringBuilder builder = new StringBuilder();
        builder.append(MapConfigConstant.MAP_SERVICE_ADD_URL);
        builder.append("?");
-       builder.append("key=" + userKey);
+       builder.append("key=").append(userKey);
        builder.append("&");
-       builder.append("name=" + name);
+       builder.append("name=").append(name);
 
        log.info(builder.toString());
        ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(builder.toString(), null, String.class);

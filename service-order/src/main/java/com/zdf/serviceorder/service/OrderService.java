@@ -152,7 +152,7 @@ public class OrderService
         radiusList.add(4000);
         radiusList.add(5000);
         ResponseResult<List<TerminalServiceResponse>> listResponseResult;
-        boolean carFlag = (Boolean) false;
+        boolean carFlag = false;
         int dispatchResult = 0;
 
         for (int index = 0; index < radiusList.size() && !carFlag; index++)

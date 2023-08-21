@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ServiceOrderClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/order/add")
-    public ResponseResult<String> addOrder(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> addOrder(@RequestBody OrderRequest orderRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/order/cancel")
-    public ResponseResult<String> cancel(@RequestParam Long orderId, @RequestParam String identity);
+    ResponseResult<String> cancel(@RequestParam Long orderId, @RequestParam String identity);
 }

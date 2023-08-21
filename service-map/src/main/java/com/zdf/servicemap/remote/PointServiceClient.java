@@ -23,7 +23,7 @@ public class PointServiceClient
     private String sid;
     @Autowired
     RestTemplate restTemplate;
-    public ResponseResult<String> uploadPoint(PointServiceRequest pointServiceRequest)
+    public ResponseResult uploadPoint(PointServiceRequest pointServiceRequest)
     {
         //&points=%5B{%22location%22%3A%22116.41%2C40.02%22%2C%22locatetime%22%3A1665330773}%5D
         //[{"location":"116.41,40.02","locatetime":1665330773}]
@@ -31,13 +31,13 @@ public class PointServiceClient
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.POINT_SERVICE_UPLOAD_URL);
         builder.append("?");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         builder.append("&");
-        builder.append("sid=" + sid);
+        builder.append("sid=").append(sid);
         builder.append("&");
-        builder.append("tid=" + pointServiceRequest.getTid());
+        builder.append("tid=").append(pointServiceRequest.getTid());
         builder.append("&");
-        builder.append("trid=" + pointServiceRequest.getTrid());
+        builder.append("trid=").append(pointServiceRequest.getTrid());
         builder.append("&");
         builder.append("points=");
         builder.append("%5B");
@@ -51,7 +51,7 @@ public class PointServiceClient
             builder.append("%7B");
             builder.append("%22location%22");
             builder.append("%3A");
-            builder.append("%22" + location + "%22");
+            builder.append("%22").append(location).append("%22");
             builder.append("%2C");
 
             builder.append("%22locatetime%22");

@@ -23,31 +23,31 @@ public class PriceRuleController
     private PriceRuleService priceRuleService;
 
     @PostMapping("/add")
-    public ResponseResult<String> addPriceRule(@RequestBody PriceRule priceRule)
+    public ResponseResult addPriceRule(@RequestBody PriceRule priceRule)
     {
         return priceRuleService.addPriceRule(priceRule);
     }
 
     @PostMapping("/edit")
-    public ResponseResult<String> editPriceRule(@RequestBody PriceRule priceRule)
+    public ResponseResult editPriceRule(@RequestBody PriceRule priceRule)
     {
         return priceRuleService.editPriceRule(priceRule);
     }
 
     @GetMapping("/get")
-    public ResponseResult<PriceRule> getPriceRule(@RequestParam String fareType)
+    public ResponseResult getPriceRule(@RequestParam String fareType)
     {
         return priceRuleService.getPriceRule(fareType);
     }
 
     @GetMapping("/is-new")
-    public ResponseResult<Boolean> isNewPriceRule(@RequestParam String fareType, @RequestParam Integer fareVersion)
+    public ResponseResult isNewPriceRule(@RequestParam String fareType, @RequestParam Integer fareVersion)
     {
         return priceRuleService.isNewPriceRule(fareType, fareVersion);
     }
 
     @PostMapping("/is-exist")
-    public ResponseResult<Boolean> isExist(@RequestBody PriceRule priceRule)
+    public ResponseResult isExist(@RequestBody PriceRule priceRule)
     {
         return priceRuleService.isExist(priceRule);
     }

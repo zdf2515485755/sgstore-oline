@@ -46,7 +46,7 @@ public class CarService
         return ResponseResult.success("1");
     }
 
-    public ResponseResult<Car> getCar(Long carid)
+    public ResponseResult getCar(Long carid)
     {
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put("id", carid);

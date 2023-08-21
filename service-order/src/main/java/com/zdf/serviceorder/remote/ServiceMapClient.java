@@ -14,9 +14,9 @@ import java.util.List;
 public interface ServiceMapClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/terminal/aroundsearch")
-    public ResponseResult<List<TerminalServiceResponse>> aroundSearch(@RequestParam String center, @RequestParam Integer radius);
+    ResponseResult<List<TerminalServiceResponse>> aroundSearch(@RequestParam String center, @RequestParam Integer radius);
 
     @RequestMapping(method = RequestMethod.POST, value = "/terminal/trsearch")
-    public ResponseResult<TraceSearchServiceResponse> trsearch(@RequestParam String tid, @RequestParam Long starttime, @RequestParam Long endtime);
+    ResponseResult<TraceSearchServiceResponse> trsearch(@RequestParam String tid, @RequestParam Long starttime, @RequestParam Long endtime);
 
 }

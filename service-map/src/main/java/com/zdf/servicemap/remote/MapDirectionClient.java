@@ -27,23 +27,22 @@ public class MapDirectionClient
         StringBuilder builder = new StringBuilder();
         builder.append(MapConfigConstant.DIRECTION_URL);
         builder.append("?");
-        builder.append("origin=" + depLongitude + "," + depLatitude);
+        builder.append("origin=").append(depLongitude).append(",").append(depLatitude);
         builder.append("&");
-        builder.append("destination=" + destLongitude + "," + destLatitude);
+        builder.append("destination=").append(destLongitude).append(",").append(destLatitude);
         builder.append("&");
         builder.append("extensions=base");
         builder.append("&");
         builder.append("output=json");
         builder.append("&");
-        builder.append("key=" + userKey);
+        builder.append("key=").append(userKey);
         log.info(builder.toString());
         //调用地图api请求响应
         ResponseEntity<String> directionForEntity = restTemplate.getForEntity(builder.toString(), String.class);
         String directionEntityString = directionForEntity.getBody();
         //log.info(directionForEntity.getBody());
         //解析响应结果
-        DirectionResponse directionResponse = parseDirectionString(directionEntityString);
-        return directionResponse;
+        return parseDirectionString(directionEntityString);
     }
 
     public DirectionResponse parseDirectionString(String directionEntityString)
@@ -77,7 +76,7 @@ public class MapDirectionClient
                 }
 
             }
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
         return directionResponse;

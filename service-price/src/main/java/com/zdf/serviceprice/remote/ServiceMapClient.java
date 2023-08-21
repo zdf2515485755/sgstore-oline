@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ServiceMapClient
 {
     @RequestMapping(method = RequestMethod.GET, value = "/direction/driving")
-    public ResponseResult<DirectionResponse> driving(@RequestBody ForecastPriceRequest forecastPriceRequest);
+    ResponseResult<DirectionResponse> driving(@RequestBody ForecastPriceRequest forecastPriceRequest);
 }

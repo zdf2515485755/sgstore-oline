@@ -31,7 +31,7 @@ public class UserService
         map.put("passenger_phone", passengerPhone);
         List<PassengerUser> passengerList = passengerUserMapper.selectByMap(map);
         //不存在就插入数据库
-        if(passengerList.size() == 0)
+        if(passengerList.isEmpty())
         {
             PassengerUser user = new PassengerUser();
             LocalDateTime now = LocalDateTime.now();
@@ -59,7 +59,7 @@ public class UserService
         HashMap<String, Object> map = new HashMap<>();
         map.put("passenger_phone", passengerPhone);
         List<PassengerUser> passengerList = passengerUserMapper.selectByMap(map);
-        if (passengerList.size() == 0)
+        if (passengerList.isEmpty())
         {
             return ResponseResult.fail(CommonStatusEnum.USER_NOT_EXIST.getCode(), CommonStatusEnum.USER_NOT_EXIST.getMessage());
         }

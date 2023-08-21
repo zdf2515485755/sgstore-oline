@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ServiceOrderClient
 {
     @RequestMapping(method = RequestMethod.POST, value = "/order/to-pick-up-passenger")
-    public ResponseResult<String> changeOrderStatus(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> changeOrderStatus(@RequestBody OrderRequest orderRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/order/arrive-departure")
-    public ResponseResult<String> arriveDeparture(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> arriveDeparture(@RequestBody OrderRequest orderRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/order/pick-up-passenger")
-    public ResponseResult<String> pickUpPassenger(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> pickUpPassenger(@RequestBody OrderRequest orderRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/order/passenger-get-off")
-    public ResponseResult<String> passengerGetoff(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> passengerGetoff(@RequestBody OrderRequest orderRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/order/cancel")
-    public ResponseResult<String> cancel(@RequestParam Long orderId, @RequestParam String identity);
+    ResponseResult<String> cancel(@RequestParam Long orderId, @RequestParam String identity);
 
     @RequestMapping(method = RequestMethod.POST, value = "/order/startPay")
-    public ResponseResult<String> startPay(@RequestBody OrderRequest orderRequest);
+    ResponseResult<String> startPay(@RequestBody OrderRequest orderRequest);
 }

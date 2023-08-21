@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ServiceSsePushClient
 {
     @RequestMapping(method = RequestMethod.GET, value = "/push")
-    public String pushContent(@RequestParam Long userId, @RequestParam String identity, @RequestParam String content);
+    String pushContent(@RequestParam Long userId, @RequestParam String identity, @RequestParam String content);
 }
