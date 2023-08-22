@@ -69,12 +69,12 @@ public class OrderService
     public ResponseResult addOrder(OrderRequest orderRequest)
     {
         //判断是否是黑名单
-        if (isBlackDevice(orderRequest))
+        if (Boolean.TRUE.equals(isBlackDevice(orderRequest)))
         {
             return ResponseResult.fail(CommonStatusEnum.DEVICE_IS_BLACK.getCode(), CommonStatusEnum.DEVICE_IS_BLACK.getMessage());
         }
         //判断该城市是否开通该服务，是否存在计价规则
-        if (!isExist(orderRequest))
+        if (Boolean.FALSE.equals(isExist(orderRequest)))
         {
             return ResponseResult.fail(CommonStatusEnum.SERVICE_NOT_SERVICE.getCode(), CommonStatusEnum.SERVICE_NOT_SERVICE.getMessage(), "");
         }
@@ -87,7 +87,7 @@ public class OrderService
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_NOT_EXIST.getCode(), CommonStatusEnum.PRICE_RULE_NOT_EXIST.getMessage(), "");
         }
-        if (!responseResult.getData())
+        if (Boolean.FALSE.equals(responseResult.getData()))
         {
             return ResponseResult.fail(CommonStatusEnum.PRICE_RULE_CHANGE.getCode(), CommonStatusEnum.PRICE_RULE_CHANGE.getMessage(),"");
         }
@@ -95,7 +95,7 @@ public class OrderService
         //判断该城市是否有司机
         String address = orderRequest.getAddress();
         ResponseResult<Boolean> availableDriverUser = serviceDriverUserClient.isAvailableDriver(address);
-        if (!availableDriverUser.getData())
+        if (Boolean.FALSE.equals(availableDriverUser.getData()))
         {
             return ResponseResult.fail(CommonStatusEnum.CITY_DRIVER_IS_NOT_EXIST.getCode(), CommonStatusEnum.CITY_DRIVER_IS_NOT_EXIST.getMessage(),"");
         }
