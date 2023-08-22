@@ -1,8 +1,8 @@
 package com.zdf.apipassenger.controller;
 
+import com.zdf.apipassenger.request.OrderRequest;
 import com.zdf.apipassenger.service.OrderService;
 import com.zdf.internalcommon.dto.ResponseResult;
-import com.zdf.internalcommon.request.OrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+/**
+ * @author mrzhang
+ */
 @RestController
 @RequestMapping("/order")
 @Validated
@@ -19,7 +22,7 @@ public class OrderController
     private OrderService orderService;
 
     @PostMapping("/add")
-    public ResponseResult addOrder(@RequestBody OrderRequest orderRequest)
+    public ResponseResult addOrder(@RequestBody @Validated OrderRequest orderRequest)
     {
         return orderService.addOrder(orderRequest);
     }

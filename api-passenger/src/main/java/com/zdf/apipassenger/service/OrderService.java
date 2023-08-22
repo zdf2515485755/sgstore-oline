@@ -1,9 +1,9 @@
 package com.zdf.apipassenger.service;
 
 import com.zdf.apipassenger.remote.ServiceOrderClient;
+import com.zdf.apipassenger.request.OrderRequest;
 import com.zdf.internalcommon.constant.IdentityConstant;
 import com.zdf.internalcommon.dto.ResponseResult;
-import com.zdf.internalcommon.request.OrderRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
