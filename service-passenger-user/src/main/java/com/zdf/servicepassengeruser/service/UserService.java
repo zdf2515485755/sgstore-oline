@@ -5,6 +5,7 @@ import com.zdf.internalcommon.constant.PassengerConstant;
 import com.zdf.internalcommon.dto.PassengerUser;
 import com.zdf.internalcommon.dto.ResponseResult;
 import com.zdf.servicepassengeruser.mapper.PassengerUserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,11 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author mrzhang
+ */
 @Service
+@Slf4j
 public class UserService
 {
     @Autowired
@@ -25,7 +30,7 @@ public class UserService
      */
     public ResponseResult loginOrRegister(String passengerPhone)
     {
-        System.out.println("phone:" + passengerPhone);
+        log.info("phone:" + passengerPhone);
         //根据电话号码查询用户
         HashMap<String, Object> map = new HashMap<>();
         map.put("passenger_phone", passengerPhone);

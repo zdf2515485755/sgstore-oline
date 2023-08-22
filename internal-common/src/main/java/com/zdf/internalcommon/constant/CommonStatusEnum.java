@@ -3,6 +3,10 @@ package com.zdf.internalcommon.constant;
 import lombok.Getter;
 
 
+/**
+ * @author mrzhang
+ */
+
 @Getter
 public enum CommonStatusEnum
 {
@@ -10,6 +14,8 @@ public enum CommonStatusEnum
     FAILL(0, "fail"),
     //验证码错误提示
     VERIFICATION_CODE_ERROR(1000, "验证码不正确"),
+    CALL_USER_ADD_ERROR(1001, "调用增加用户服务错误"),
+    SET_TOKEN_ERROR(1002, "设置token失败"),
     //token错误提示
     TOKEN_ERROR(1100, "token错误"),
     //用户不存在错误提示
@@ -39,9 +45,9 @@ public enum CommonStatusEnum
     ORDER_CANCEL_ERROR(1601, "订单取消失败"),
 
     VALIDATION_EXCEPTION(1900, "参数验证错误");
-    private int code;
+    private final int code;
     @Getter
-    private String message;
+    private final String message;
 
     CommonStatusEnum(int code, String message)
     {

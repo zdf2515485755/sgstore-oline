@@ -6,8 +6,11 @@ import com.zdf.servicepassengeruser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author mrzhang
+ */
 @RestController
-public class userController
+public class UserController
 {
     @Autowired
     private UserService userService;
