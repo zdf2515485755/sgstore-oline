@@ -41,7 +41,6 @@ public class VerificationCodeService
         //获取验证码
         ResponseResult<NumberResponseCode> numberCodeResponse = serviceVerificationCodeClient.getNumberCode(6);
         int numberCode = numberCodeResponse.getData().getNumber();
-        //System.out.println(numberCode);
         String key = RedisKeyUtils.generateKeyByPhone(passengerPhone, IdentityConstant.PASSENGER_IDENTITY);
         //把验证码存入redis
         stringRedisTemplate.opsForValue().set(key, numberCode + "", 2, TimeUnit.MINUTES);
