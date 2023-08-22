@@ -2,6 +2,7 @@ package com.zdf.apipassenger.interceptor;
 
 import com.zdf.internalcommon.constant.CommonStatusEnum;
 import com.zdf.internalcommon.dto.ResponseResult;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -10,7 +11,12 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Set;
 
+/**
+ * @author mrzhang
+ * 统一参数校验异常处理
+ */
 @RestControllerAdvice
+@Order(1)
 public class GlobalValidationExceptHandler
 {
     @ExceptionHandler(MethodArgumentNotValidException.class)
